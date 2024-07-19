@@ -1,0 +1,9 @@
+<resources>
+    <string name="default_web_client_id" translatable="false"></string> <!-- This can be left empty if not found -->
+    <string name="firebase_database_url" translatable="false"></string> <!-- Add your Firebase Realtime Database URL if available -->
+    <string name="gcm_defaultSenderId" translatable="false">949393165159</string>
+    <string name="google_api_key" translatable="false">AIzaSyBZXE3hlc2s17ljEaeQ1LjMQWbkVFPEUeg</string>
+    <string name="google_app_id" translatable="false">1:949393165159:android:52b1f0bfadb01040a2bdc2</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBZXE3hlc2s17ljEaeQ1LjMQWbkVFPEUeg</string> <!-- Reuse the API key here -->
+    <string name="project_id" translatable="false">auth-ee25b</string>
+</resources>
