@@ -2,6 +2,8 @@ import 'package:auth/main.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
+import '../viewmodels/login_view_model.dart';
+import 'package:provider/provider.dart';
 
 class HomeView extends StatelessWidget {
   final user = FirebaseAuth.instance.currentUser!;
@@ -16,7 +18,11 @@ class HomeView extends StatelessWidget {
             Text('${user.email}  welcome'),
             const SizedBox(height: 28),
             TextButton(
-              onPressed: () => context.go(login_page),
+              onPressed: () async {
+                final viewModel = Provider.of<LoginViewModel>(context, listen: false);
+                await viewModel.signOut(context);
+                context.go(login_page);// Use the signOut method from your view model
+              },
               child: Text('Logout'),
               style: TextButton.styleFrom(
                 padding: EdgeInsets.zero, // Remove padding

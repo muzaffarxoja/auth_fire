@@ -45,6 +45,17 @@ class LoginViewModel with ChangeNotifier {
     }
   }
 
+  Future<void> signOut(BuildContext context) async {
+    try {
+      await _firebaseAuth.signOut();
+      // Navigate to login page after successful logout
+
+    } catch (e) {
+      // Handle errors
+      print(e);
+    }
+  }
+
   @override
   void dispose() {
     emailController.dispose();

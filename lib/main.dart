@@ -1,3 +1,4 @@
+import 'package:auth/viewmodels/login_view_model.dart';
 import 'package:auth/views/register_view.dart';
 import 'package:auth/views/splash_screeen.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,12 @@ Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  runApp(MyApp()
+  runApp( MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (_) => LoginViewModel()),
+    ],
+    child: MyApp(),
+  ),
 
 
   );
