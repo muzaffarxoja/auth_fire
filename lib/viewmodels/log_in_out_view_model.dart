@@ -1,4 +1,4 @@
-// login_view_model.dart
+// log_in_out_view_model.dart
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
@@ -49,7 +49,7 @@ class LoginViewModel with ChangeNotifier {
     try {
       await _firebaseAuth.signOut();
       // Navigate to login page after successful logout
-
+      context.go(login_page);// Use the signOut method from your view model
     } catch (e) {
       // Handle errors
       print(e);

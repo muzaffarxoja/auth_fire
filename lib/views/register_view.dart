@@ -1,8 +1,9 @@
-import 'package:flutter_regex/flutter_regex.dart';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../widgets/custom_elevated_button.dart';
 import '../widgets/custom_text_form_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 
 class RegisterScreen extends StatefulWidget {
@@ -46,101 +47,118 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-         leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
-          onPressed: () => context.pop(),
-        ),
-        title: const Center(
-          child: Text(
-            'Registration',
-            style: TextStyle(fontSize: 16),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+           leading: IconButton(
+            icon: const Icon(Icons.arrow_back_ios),
+            onPressed: () => context.pop(),
+          ),
+          title: const Center(
+            child: Text(
+              'Registration',
+              style: TextStyle(fontSize: 16),
+            ),
           ),
         ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            const SizedBox(height: 20),
-            const Text(
-              'Create acount \nLorby',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 24,
-                color: Color(0xff212121),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              const SizedBox(height: 20),
+              const Text(
+                'Create account \nLorby',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 24,
+                  color: Color(0xff212121),
+                ),
               ),
-            ),
-            Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  CustomTextFormField(
-                      controller: emailController,
-                      labelText: 'Enter Emai',
-                      obscureText: false),
-                  const SizedBox(height: 14),
-                  CustomTextFormField(
-                      controller: loginController,
-                      labelText: 'Enter login',
-                      obscureText: false),
-                  const SizedBox(height: 14),
-                  TextFormField(
-                    controller: _passwordController,
-                    decoration: InputDecoration(labelText: 'Password'),
-                    obscureText: true,
-                    onChanged: _onPasswordChanged,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter a password';
-                      }
-                      if (!hasUpperCase ||
-                          !hasLowerCase ||
-                          !hasDigit ||
-                          !hasSpecialCharacter ||
-                          !hasValidLength) {
-                        return 'Password does not meet all conditions';
-                      }
-                      return null;
-                    },
-                  ),
-                  const SizedBox(height: 10),
-                  PasswordCriteriaRow(
-                      text: 'At least 1 uppercase letter',
-                      isValid: hasUpperCase),
-                  PasswordCriteriaRow(
-                      text: 'At least 1 lowercase letter',
-                      isValid: hasLowerCase),
-                  PasswordCriteriaRow(
-                      text: 'At least 1 digit', isValid: hasDigit),
-                  PasswordCriteriaRow(
-                      text: 'At least 1 special character',
-                      isValid: hasSpecialCharacter),
-                  PasswordCriteriaRow(
-                      text: '8 to 15 characters long', isValid: hasValidLength),
-                  SizedBox(height: 14),
-                  CustomTextFormField(
-                      controller: passwordConfirmController,
-                      labelText: 'Confirm password',
-                      obscureText: false),
-                  SizedBox(height: 14),
-                  CustomElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState?.validate() ?? false) {
-                        // Process the registration
-                      }
-                    },
-                    text: 'Register',
-                  ),
-                ],
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    CustomTextFormField(
+                        controller: emailController,
+                        labelText: 'Enter Email',
+                        obscureText: false),
+                    const SizedBox(height: 14),
+                    CustomTextFormField(
+                        controller: loginController,
+                        labelText: 'Enter login',
+                        obscureText: false),
+                    const SizedBox(height: 14),
+                    TextFormField(
+                      controller: _passwordController,
+                      decoration: const InputDecoration(labelText: 'Password'),
+                      obscureText: true,
+                      onChanged: _onPasswordChanged,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a password';
+                        }
+                        if (!hasUpperCase ||
+                            !hasLowerCase ||
+                            !hasDigit ||
+                            !hasSpecialCharacter ||
+                            !hasValidLength) {
+                          return 'Password does not meet all conditions';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 10),
+                    PasswordCriteriaRow(
+                        text: 'At least 1 uppercase letter',
+                        isValid: hasUpperCase),
+                    PasswordCriteriaRow(
+                        text: 'At least 1 lowercase letter',
+                        isValid: hasLowerCase),
+                    PasswordCriteriaRow(
+                        text: 'At least 1 digit', isValid: hasDigit),
+                    PasswordCriteriaRow(
+                        text: 'At least 1 special character',
+                        isValid: hasSpecialCharacter),
+                    PasswordCriteriaRow(
+                        text: '8 to 15 characters long', isValid: hasValidLength),
+                    SizedBox(height: 14),
+                    CustomTextFormField(
+                        controller: passwordConfirmController,
+                        labelText: 'Confirm password',
+                        obscureText: false),
+                    const SizedBox(height: 14),
+                    CustomElevatedButton(
+                      onPressed: () {
+                        if (_formKey.currentState?.validate() ?? false) {
+                            signUp();
+
+                          // Process the registration
+                        }
+                      },
+                      text: 'Register',
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
+ Future signUp() async {
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text.trim(),
+          password: _passwordController.text.trim());
+    }
+    on FirebaseAuthException catch(e) {
+      debugPrint(e as String?);
+      
+    }
+ }
+
+
 }
 
 class PasswordCriteriaRow extends StatelessWidget {
