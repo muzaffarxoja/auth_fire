@@ -1,4 +1,5 @@
 // login_view.dart
+import 'package:auth/main.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
@@ -42,8 +43,13 @@ class LoginView extends StatelessWidget {
                   ),
                   const SizedBox(height: 28),
                   TextButton(
-                    onPressed: () => context.push('/register'),
+                    onPressed: () => context.push(register_page),
                     child: Text('I don\'t have an account'),
+                    style: TextButton.styleFrom(
+                      //foregroundColor: Colors.blue,
+                      padding: EdgeInsets.zero, // Remove padding
+                      backgroundColor: Colors.transparent, // Text color
+                    ),
                   ),
                 ],
               ),
