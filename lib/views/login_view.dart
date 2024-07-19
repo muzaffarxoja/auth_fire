@@ -28,9 +28,11 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Login')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
+      body: StreamBuilder<User?>(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) => Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Form(
               key: _formKey,
               child: Column(
                 children: [
@@ -48,6 +50,7 @@ class _LoginViewState extends State<LoginView> {
                       return null;
                     },
                   ),
+                  const SizedBox(height: 5),
                   CustomPasswordField(
                     controller: passwordController,
                     labelText: 'Password',
@@ -60,9 +63,13 @@ class _LoginViewState extends State<LoginView> {
                   ),
                   const SizedBox(height: 20),
                   CustomElevatedButton(
-                          onPressed: signIn,
-                          text: 'Login',
-                        ),
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        signIn();
+                      }
+                    },
+                    text: 'Login',
+                  ),
                   const SizedBox(height: 28),
                   TextButton(
                       onPressed: () => context.push(register_page),
@@ -71,7 +78,8 @@ class _LoginViewState extends State<LoginView> {
                 ],
               ),
             ),
-        ),
+          )
+      ),
     );
   }
 
