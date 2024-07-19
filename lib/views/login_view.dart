@@ -1,92 +1,56 @@
-import 'package:firebase_auth/firebase_auth.dart';
+// login_view.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
+
+import '../viewmodels/login_view_model.dart';
 import '../widgets/custom_text_form_field.dart';
 import '../widgets/custom_password_field.dart';
 import '../widgets/custom_elevated_button.dart';
-import '../main.dart';
-import 'package:go_router/go_router.dart';
 
-class LoginView extends StatefulWidget {
-  @override
-  _LoginViewState createState() => _LoginViewState();
-}
 
-class _LoginViewState extends State<LoginView> {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
-
-  @override
-  void dispose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
-
+class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('Login')),
-      body: StreamBuilder<User?>(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot) => Padding(
+    return ChangeNotifierProvider(
+      create: (_) => LoginViewModel(),
+      child: Scaffold(
+        appBar: AppBar(title: Text('Login')),
+        body: Consumer<LoginViewModel>(
+          builder: (context, viewModel, child) => Padding(
             padding: const EdgeInsets.all(16.0),
             child: Form(
-              key: _formKey,
+              key: viewModel.formKey,
               child: Column(
                 children: [
                   CustomTextFormField(
-                    controller: emailController,
+                    controller: viewModel.emailController,
                     labelText: 'Email',
                     obscureText: false,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your email';
-                      }
-                      if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-                        return 'Please enter a valid email';
-                      }
-                      return null;
-                    },
+                    validator: viewModel.emailValidator,
                   ),
                   const SizedBox(height: 5),
                   CustomPasswordField(
-                    controller: passwordController,
+                    controller: viewModel.passwordController,
                     labelText: 'Password',
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your password';
-                      }
-                      return null;
-                    },
+                    validator: viewModel.passwordValidator,
                   ),
                   const SizedBox(height: 20),
                   CustomElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        signIn();
-                      }
-                    },
+                    onPressed: () => viewModel.signIn(context),
                     text: 'Login',
                   ),
                   const SizedBox(height: 28),
                   TextButton(
-                      onPressed: () => context.push(register_page),
-                      child: Text('I don\'t have account')),
-
+                    onPressed: () => context.push('/register'),
+                    child: Text('I don\'t have an account'),
+                  ),
                 ],
               ),
             ),
-          )
+          ),
+        ),
       ),
     );
   }
-
-  Future signIn() async {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailController.text.trim(), password: passwordController.text.trim());
-
-  }
 }
-
