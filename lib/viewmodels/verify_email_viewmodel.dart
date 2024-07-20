@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class VerifyEmailViewModel with ChangeNotifier {
   bool isEmailVerified = false;
+  bool canResendEmail = false;
   Timer? timer;
 
   VerifyEmailViewModel() {
@@ -28,6 +29,14 @@ class VerifyEmailViewModel with ChangeNotifier {
     try {
       final user = FirebaseAuth.instance.currentUser!;
       await user.sendEmailVerification();
+
+      canResendEmail = false;
+      notifyListeners();
+      await Future.delayed(Duration(seconds: 60));
+      canResendEmail = true;
+      notifyListeners();
+
+
     } catch (e) {
       print(e);
     }

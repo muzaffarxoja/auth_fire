@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import '../viewmodels/verify_email_viewmodel.dart';
 import 'home_view.dart';
 
-
 class VerifyEmailView extends StatelessWidget {
   const VerifyEmailView({super.key});
 
@@ -17,23 +16,27 @@ class VerifyEmailView extends StatelessWidget {
           return viewModel.isEmailVerified
               ? HomeView()
               : Scaffold(
-            appBar: AppBar(
-              title: const Text('Verify Email'),
-            ),
-            body: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text('Please verify your email'),
-                  const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: () => viewModel.sendVerificationEmail(),
-                    child: const Text('Resend Verification Email'),
+                  appBar: AppBar(
+                    title: const Text('Verify Email'),
                   ),
-                ],
-              ),
-            ),
-          );
+                  body: Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('Please verify your email'),
+                        const SizedBox(height: 20),
+                        ElevatedButton(
+                          child: const Text('Resend Verification Email'),
+                          onPressed: viewModel.canResendEmail
+                              ? () async {
+                                  await viewModel.sendVerificationEmail();
+                                }
+                              : null,
+                        ),
+                      ],
+                    ),
+                  ),
+                );
         },
       ),
     );
