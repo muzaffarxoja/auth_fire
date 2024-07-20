@@ -6,7 +6,7 @@ import '../viewmodels/sign_up_viewmodel.dart';
 import '../widgets/custom_elevated_button.dart';
 import '../widgets/custom_text_form_field.dart';
 
-class RegisterScreen extends StatelessWidget {
+class SignUpView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewModel = Provider.of<RegisterViewModel>(context);

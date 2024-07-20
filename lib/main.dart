@@ -2,7 +2,7 @@ import 'viewmodels/sign_in_out_viewmodel.dart';
 import 'viewmodels/sign_up_viewmodel.dart';
 import 'views/sign_up_view.dart';
 import 'views/splash_screeen_view.dart';
-import 'views/sign_in.dart';
+import 'views/sign_in_view.dart';
 import 'views/home_view.dart';
 
 import 'package:flutter/material.dart';
@@ -21,11 +21,11 @@ final _router = GoRouter(
   routes: [
     GoRoute(
       path: login_page,
-      builder: (context, state) => LoginView(),
+      builder: (context, state) => SignInView(),
     ),
     GoRoute(
       path: register_page,
-      builder: (context, state) => RegisterScreen(),
+      builder: (context, state) => SignUpView(),
     ),
     GoRoute(
       path: home_page,

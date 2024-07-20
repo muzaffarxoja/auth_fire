@@ -1,4 +1,4 @@
-// sign_in.dart
+// sign_in_view.dart
 import 'package:auth/main.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +10,7 @@ import '../widgets/custom_password_field.dart';
 import '../widgets/custom_elevated_button.dart';
 
 
-class LoginView extends StatelessWidget {
+class SignInView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
