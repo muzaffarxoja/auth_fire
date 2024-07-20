@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../viewmodels/sign_up_viewmodel.dart';
 import '../widgets/custom_elevated_button.dart';
+import '../widgets/custom_password_field.dart';
 import '../widgets/custom_text_form_field.dart';
 
 class SignUpView extends StatelessWidget {
@@ -29,13 +30,14 @@ class SignUpView extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              const SizedBox(height: 20),
+              const SizedBox(height: 24),
               const Text(
                 'Create account \nLorby',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 24,
                   color: Color(0xff212121),
+                  fontWeight: FontWeight.w500
                 ),
               ),
               Form(
@@ -55,10 +57,9 @@ class SignUpView extends StatelessWidget {
                       obscureText: false,
                     ),
                     const SizedBox(height: 14),
-                    TextFormField(
+                    CustomPasswordField(
                       controller: viewModel.passwordController,
-                      decoration: InputDecoration(labelText: 'Password'),
-                      obscureText: true,
+                      labelText: 'Password',
                       onChanged: viewModel.onPasswordChanged,
                       validator: viewModel.passwordValidator,
                     ),
@@ -84,10 +85,11 @@ class SignUpView extends StatelessWidget {
                       isValid: viewModel.hasValidLength,
                     ),
                     const SizedBox(height: 14),
-                    CustomTextFormField(
+                    CustomPasswordField(
                       controller: viewModel.passwordConfirmController,
                       labelText: 'Confirm password',
-                      obscureText: false,
+                      onChanged: null,
+                      validator: viewModel.isPasswordSame,
                     ),
                     const SizedBox(height: 14),
                     CustomElevatedButton(
@@ -121,16 +123,16 @@ class PasswordCriteriaRow extends StatelessWidget {
 
     return Row(
       children: [
-        Icon(
-          isValid ? Icons.check : Icons.close,
-          color: isValid ? Colors.green : Colors.red,
-        ),
-        const SizedBox(width: 10),
         Text(
           text,
           style: TextStyle(
             color: textColor,
           ),
+        ),
+        const SizedBox(width: 10),
+        Icon(
+          isValid ? Icons.check : Icons.close,
+          color: isValid ? Colors.green : Colors.red,
         ),
       ],
     );

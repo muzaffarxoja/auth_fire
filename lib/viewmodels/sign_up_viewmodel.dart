@@ -20,6 +20,7 @@ class RegisterViewModel with ChangeNotifier {
   bool hasDigit = false;
   bool hasSpecialCharacter = false;
   bool hasValidLength = false;
+  bool isSamePassword = false;
 
   void onPasswordChanged(String password) {
     if (password.isEmpty) {
@@ -34,6 +35,7 @@ class RegisterViewModel with ChangeNotifier {
       hasDigit = RegExp(r'[0-9]').hasMatch(password);
       hasSpecialCharacter = RegExp(r'[!@#\$%^&*(),.?":{}|<>]').hasMatch(password);
       hasValidLength = password.length >= 8 && password.length <= 15;
+
     }
     notifyListeners();
   }
@@ -45,8 +47,11 @@ class RegisterViewModel with ChangeNotifier {
     if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
       return 'Please enter a valid email';
     }
+
     return null;
   }
+
+
 
   String? passwordValidator(String? value) {
     if (value == null || value.isEmpty) {
@@ -55,8 +60,23 @@ class RegisterViewModel with ChangeNotifier {
     if (!hasUpperCase || !hasLowerCase || !hasDigit || !hasSpecialCharacter || !hasValidLength) {
       return 'Password does not meet all conditions';
     }
+    if (passwordController == passwordConfirmController) {
+      return 'Please confirm password';
+    }
     return null;
   }
+
+  String? isPasswordSame(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter a password';
+    }
+
+    if (passwordController != passwordConfirmController) {
+      return 'Your passwords are not the same';
+    }
+    return null;
+  }
+
 
   Future<void> signUp(BuildContext context) async {
     if (formKey.currentState?.validate() ?? false) {

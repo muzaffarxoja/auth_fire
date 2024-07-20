@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 
+import '../viewmodels/sign_up_viewmodel.dart';
+
 class CustomPasswordField extends StatefulWidget {
   final TextEditingController controller;
   final String labelText;
   final String? Function(String?)? validator;
+  final void Function(String)? onChanged;
 
   CustomPasswordField({
     required this.controller,
     required this.labelText,
-    this.validator,
+    required this.validator,
+    required this.onChanged
   });
 
   @override
@@ -27,6 +31,7 @@ class _CustomPasswordFieldState extends State<CustomPasswordField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: widget.onChanged,
       controller: widget.controller,
       obscureText: _obscureText,
       decoration: InputDecoration(

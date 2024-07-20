@@ -53,6 +53,7 @@ class SignInView extends StatelessWidget {
                       CustomPasswordField(
                         controller: viewModel.passwordController,
                         labelText: 'Password',
+                        onChanged: null,
                         validator: viewModel.passwordValidator,
                       ),
                       const SizedBox(height: 28),
