@@ -1,3 +1,5 @@
+import 'views/verify_email_view.dart';
+
 import 'viewmodels/sign_in_out_viewmodel.dart';
 import 'viewmodels/sign_up_viewmodel.dart';
 import 'views/sign_up_view.dart';
@@ -14,6 +16,7 @@ const String login_page = '/login_page';
 const String register_page = '/register_page';
 const String home_page = '/home_page';
 const String splash_screen = '/splash_screen';
+const String verification_page = '/varification_page';
 
 final _router = GoRouter(
   initialLocation: splash_screen,
@@ -34,6 +37,10 @@ final _router = GoRouter(
     GoRoute(
       path: splash_screen,
       builder: (context, state) => const SplashScreen(),
+    ),
+    GoRoute(
+      path: verification_page,
+      builder: (context, state) => const VerifyEmailView(),
     ),
   ],
 );

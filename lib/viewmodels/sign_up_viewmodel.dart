@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 
 import '../main.dart';
+import '../views/verify_email_view.dart';
 
 class RegisterViewModel with ChangeNotifier {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -64,7 +65,7 @@ class RegisterViewModel with ChangeNotifier {
           email: emailController.text.trim(),
           password: passwordController.text.trim(),
         );
-        context.go(home_page);  // Adjust the route according to your app's navigation structure
+        context.go(verification_page);  // Adjust the route according to your app's navigation structure
       } on FirebaseAuthException catch (e) {
         print(e);
       }
