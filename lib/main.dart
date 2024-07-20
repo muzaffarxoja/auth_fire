@@ -1,5 +1,5 @@
+import 'viewmodels/verify_email_viewmodel.dart';
 import 'views/verify_email_view.dart';
-
 import 'viewmodels/sign_in_out_viewmodel.dart';
 import 'viewmodels/sign_up_viewmodel.dart';
 import 'views/sign_up_view.dart';
@@ -53,6 +53,7 @@ Future main() async {
     providers: [
       ChangeNotifierProvider(create: (_) => LoginViewModel()),
       ChangeNotifierProvider(create: (_) => RegisterViewModel()),
+      ChangeNotifierProvider(create: (_) => VerifyEmailViewModel()),
     ],
     child: MyApp(),
   ),

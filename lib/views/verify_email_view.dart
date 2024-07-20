@@ -1,71 +1,41 @@
-import 'dart:async';
-
-import 'package:auth/main.dart';
+// verify_email_view.dart
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
+import 'package:provider/provider.dart';
+import '../viewmodels/verify_email_viewmodel.dart';
 import 'home_view.dart';
 
-class VerifyEmailView extends StatefulWidget {
+
+class VerifyEmailView extends StatelessWidget {
   const VerifyEmailView({super.key});
 
   @override
-  State<VerifyEmailView> createState() => _VerifyEmailViewState();
-}
-
-class _VerifyEmailViewState extends State<VerifyEmailView> {
-  bool isEmailVerified = false;
-  Timer? timer;
-
-  @override
-  void initState() {
-    super.initState();
-
-    isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
-
-    if (!isEmailVerified) {
-      sendVerificationEmail();
-
-      timer = Timer.periodic(
-        Duration(seconds: 3),
-        (_) => checkEmailVerified(),
-      );
-    }
-  }
-
-  Future checkEmailVerified() async {
-    await FirebaseAuth.instance.currentUser!.reload();
-
-    setState(() {
-      isEmailVerified = FirebaseAuth.instance.currentUser!.emailVerified;
-    });
-
-    if (isEmailVerified) timer?.cancel();
-  }
-
-  @override
-  void dispose() {
-    timer?.cancel();
-    super.dispose();
-  }
-
-  Future sendVerificationEmail() async {
-    try {
-      final user = FirebaseAuth.instance.currentUser!;
-      await user.sendEmailVerification();
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return isEmailVerified
-        ? HomeView()
-        : Scaffold(
+    return ChangeNotifierProvider(
+      create: (_) => VerifyEmailViewModel(),
+      child: Consumer<VerifyEmailViewModel>(
+        builder: (context, viewModel, child) {
+          return viewModel.isEmailVerified
+              ? HomeView()
+              : Scaffold(
             appBar: AppBar(
               title: const Text('Verify Email'),
             ),
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('Please verify your email'),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () => viewModel.sendVerificationEmail(),
+                    child: const Text('Resend Verification Email'),
+                  ),
+                ],
+              ),
+            ),
           );
+        },
+      ),
+    );
   }
 }
