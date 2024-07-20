@@ -1,12 +1,12 @@
-import 'package:auth/viewmodels/sign_in_out_viewmodel.dart';
-import 'package:auth/views/sign_up_view.dart';
-import 'package:auth/views/splash_screeen_view.dart';
-import 'package:flutter/material.dart';
-
-import 'package:provider/provider.dart';
-
+import 'viewmodels/sign_in_out_viewmodel.dart';
+import 'viewmodels/sign_up_viewmodel.dart';
+import 'views/sign_up_view.dart';
+import 'views/splash_screeen_view.dart';
 import 'views/sign_in.dart';
 import 'views/home_view.dart';
+
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -45,6 +45,7 @@ Future main() async {
   runApp( MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => LoginViewModel()),
+      ChangeNotifierProvider(create: (_) => RegisterViewModel()),
     ],
     child: MyApp(),
   ),
