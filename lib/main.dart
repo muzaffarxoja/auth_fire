@@ -1,11 +1,11 @@
-import 'package:auth/viewmodels/log_in_out_view_model.dart';
-import 'package:auth/views/register_view.dart';
-import 'package:auth/views/splash_screeen.dart';
+import 'package:auth/viewmodels/sign_in_out_viewmodel.dart';
+import 'package:auth/views/sign_up_view.dart';
+import 'package:auth/views/splash_screeen_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
-import 'views/login_view.dart';
+import 'views/sign_in.dart';
 import 'views/home_view.dart';
 import 'package:go_router/go_router.dart';
 import 'package:firebase_core/firebase_core.dart';

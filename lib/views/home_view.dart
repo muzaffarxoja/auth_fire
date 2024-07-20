@@ -2,7 +2,7 @@ import 'package:auth/main.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
-import '../viewmodels/log_in_out_view_model.dart';
+import '../viewmodels/sign_in_out_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 class HomeView extends StatelessWidget {
