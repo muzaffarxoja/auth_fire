@@ -66,23 +66,23 @@ class SignUpView extends StatelessWidget {
                       ),
                       const SizedBox(height: 10),
                       PasswordCriteriaRow(
-                        text: '* At least 1 uppercase letter',
+                        text: '• At least 1 uppercase letter',
                         isValid: viewModel.hasUpperCase,
                       ),
                       PasswordCriteriaRow(
-                        text: '* At least 1 lowercase letter',
+                        text: '• At least 1 lowercase letter',
                         isValid: viewModel.hasLowerCase,
                       ),
                       PasswordCriteriaRow(
-                        text: '* At least 1 digit',
+                        text: '• At least 1 digit',
                         isValid: viewModel.hasDigit,
                       ),
                       PasswordCriteriaRow(
-                        text: '* At least 1 special character',
+                        text: '• At least 1 special character',
                         isValid: viewModel.hasSpecialCharacter,
                       ),
                       PasswordCriteriaRow(
-                        text: '* 8 to 15 characters long',
+                        text: '• 8 to 15 characters long',
                         isValid: viewModel.hasValidLength,
                       ),
                       const SizedBox(height: 14),
