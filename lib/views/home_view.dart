@@ -1,4 +1,5 @@
 import 'package:auth/main.dart';
+import 'package:auth/widgets/splash_screen_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
@@ -10,28 +11,23 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-          appBar: AppBar(title: Text('Home')),
-          body: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
+    return  Scaffold(
+      body: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text('${user.email}  welcome'),
+              CustomSplashScreen(text1: 'Welcome back', text1Size: 20, text2: 'Lorby-your personal tutor',),
               const SizedBox(height: 28),
-              TextButton(
-                onPressed: () async {
+              GestureDetector(
+                onTap: () async {
                   final viewModel = Provider.of<LoginViewModel>(context, listen: false);
                   await viewModel.signOut(context);
 
                 },
                 child: Text('Logout'),
-                style: TextButton.styleFrom(
-                  padding: EdgeInsets.zero, // Remove padding
-                  backgroundColor: Colors.transparent, // Text color
-                ),
+
               ),
             ],
-          )),
+          ),
     );
   }
 }

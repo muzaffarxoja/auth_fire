@@ -1,4 +1,3 @@
-// sign_in_view.dart
 import 'package:auth/main.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,7 +8,6 @@ import '../widgets/custom_text_form_field.dart';
 import '../widgets/custom_password_field.dart';
 import '../widgets/custom_elevated_button.dart';
 
-
 class SignInView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -18,12 +16,14 @@ class SignInView extends StatelessWidget {
       child: Scaffold(
         body: Consumer<LoginViewModel>(
           builder: (context, viewModel, child) => SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Form(
-                key: viewModel.formKey,
-                child: SingleChildScrollView(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Form(
+                  key: viewModel.formKey,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SizedBox(height: 24),
                       Image(
@@ -62,7 +62,7 @@ class SignInView extends StatelessWidget {
                       ),
                       const SizedBox(height: 28),
                       GestureDetector(
-                        child: Text('I don\'t have an account'),
+                        child: Text('Sign out'),
                         onTap: () => context.push(register_page),
                       ),
                     ],

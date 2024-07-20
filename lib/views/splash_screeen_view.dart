@@ -1,3 +1,4 @@
+import 'package:auth/widgets/splash_screen_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -25,39 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(23),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(height: 180),
-            Text(
-              'Lorby',
-              style: TextStyle(
-                fontSize: 40,
-                fontWeight: FontWeight.w500,
-                color: Color(0xff212121),
-              ),
-            ),
-            SizedBox(height: 8),
-            Text(
-              'you personal tutor',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w400,
-                color: Color(0xff212121),
-              ),
-            ),
-            SizedBox(height: 65),
-            Image(
-              height: 350,
-              width: double.maxFinite,
-              fit: BoxFit.cover,
-              image: AssetImage('assets/images/splash_image.png'),
-            ),
-          ],
-        ),
-      ),
-    );
+        body: CustomSplashScreen(
+          text1: 'Lorby', text1Size: 40.0, text2: 'your personal tutor',));
   }
 }
