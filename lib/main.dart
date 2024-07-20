@@ -68,9 +68,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       routerConfig: _router,
       title: 'Flutter MVVM Auth',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      // theme: ThemeData(
+      //   primarySwatch: Colors.blue,
+      // ),
       // home: Consumer<AuthViewModel>(
       //   builder: (context, authViewModel, child) {
       //     return authViewModel.users.isNotEmpty ? HomeView() : LoginView();

@@ -16,10 +16,10 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
 
     // Delayed navigation
-    // Future.delayed(const Duration(seconds: 5), () {
-    //   context.go(login_page); // Ensure you have the correct route name
-    // }
-    // );
+    Future.delayed(const Duration(seconds: 5), () {
+      context.go(login_page); // Ensure you have the correct route name
+    }
+    );
   }
 
   @override
