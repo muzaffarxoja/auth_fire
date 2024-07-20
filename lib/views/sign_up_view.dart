@@ -26,80 +26,82 @@ class SignUpView extends StatelessWidget {
             ),
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              const SizedBox(height: 24),
-              const Text(
-                'Create account \nLorby',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 24,
-                  color: Color(0xff212121),
-                  fontWeight: FontWeight.w500
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                const SizedBox(height: 24),
+                const Text(
+                  'Create account \nLorby',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 24,
+                    color: Color(0xff212121),
+                    fontWeight: FontWeight.w500
+                  ),
                 ),
-              ),
-              Form(
-                key: viewModel.formKey,
-                child: Column(
-                  children: [
-                    CustomTextFormField(
-                      controller: viewModel.emailController,
-                      labelText: 'Enter Email',
-                      obscureText: false,
-                      validator: viewModel.emailValidator,
-                    ),
-                    const SizedBox(height: 14),
-                    CustomTextFormField(
-                      controller: viewModel.loginController,
-                      labelText: 'Enter login',
-                      obscureText: false,
-                    ),
-                    const SizedBox(height: 14),
-                    CustomPasswordField(
-                      controller: viewModel.passwordController,
-                      labelText: 'Password',
-                      onChanged: viewModel.onPasswordChanged,
-                      validator: viewModel.passwordValidator,
-                    ),
-                    const SizedBox(height: 10),
-                    PasswordCriteriaRow(
-                      text: 'At least 1 uppercase letter',
-                      isValid: viewModel.hasUpperCase,
-                    ),
-                    PasswordCriteriaRow(
-                      text: 'At least 1 lowercase letter',
-                      isValid: viewModel.hasLowerCase,
-                    ),
-                    PasswordCriteriaRow(
-                      text: 'At least 1 digit',
-                      isValid: viewModel.hasDigit,
-                    ),
-                    PasswordCriteriaRow(
-                      text: 'At least 1 special character',
-                      isValid: viewModel.hasSpecialCharacter,
-                    ),
-                    PasswordCriteriaRow(
-                      text: '8 to 15 characters long',
-                      isValid: viewModel.hasValidLength,
-                    ),
-                    const SizedBox(height: 14),
-                    CustomPasswordField(
-                      controller: viewModel.passwordConfirmController,
-                      labelText: 'Confirm password',
-                      onChanged: null,
-                      validator: viewModel.isPasswordSame,
-                    ),
-                    const SizedBox(height: 14),
-                    CustomElevatedButton(
-                      onPressed: () => viewModel.signUp(context),
-                      text: 'Register',
-                    ),
-                  ],
+                Form(
+                  key: viewModel.formKey,
+                  child: Column(
+                    children: [
+                      CustomTextFormField(
+                        controller: viewModel.emailController,
+                        labelText: 'Enter Email',
+                        obscureText: false,
+                        validator: viewModel.emailValidator,
+                      ),
+                      const SizedBox(height: 14),
+                      CustomTextFormField(
+                        controller: viewModel.loginController,
+                        labelText: 'Enter login',
+                        obscureText: false,
+                      ),
+                      const SizedBox(height: 14),
+                      CustomPasswordField(
+                        controller: viewModel.passwordController,
+                        labelText: 'Password',
+                        onChanged: viewModel.onPasswordChanged,
+                        validator: viewModel.passwordValidator,
+                      ),
+                      const SizedBox(height: 10),
+                      PasswordCriteriaRow(
+                        text: '* At least 1 uppercase letter',
+                        isValid: viewModel.hasUpperCase,
+                      ),
+                      PasswordCriteriaRow(
+                        text: '* At least 1 lowercase letter',
+                        isValid: viewModel.hasLowerCase,
+                      ),
+                      PasswordCriteriaRow(
+                        text: '* At least 1 digit',
+                        isValid: viewModel.hasDigit,
+                      ),
+                      PasswordCriteriaRow(
+                        text: '* At least 1 special character',
+                        isValid: viewModel.hasSpecialCharacter,
+                      ),
+                      PasswordCriteriaRow(
+                        text: '* 8 to 15 characters long',
+                        isValid: viewModel.hasValidLength,
+                      ),
+                      const SizedBox(height: 14),
+                      CustomPasswordField(
+                        controller: viewModel.passwordConfirmController,
+                        labelText: 'Confirm password',
+                        onChanged: null,
+                        validator: viewModel.isPasswordSame,
+                      ),
+                      const SizedBox(height: 14),
+                      CustomElevatedButton(
+                        onPressed: () => viewModel.signUp(context),
+                        text: 'Register',
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
