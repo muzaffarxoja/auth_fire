@@ -28,8 +28,7 @@ class AfterFirstSignUp extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: Color(0xff212121),
+                color: Colors.black,
               ),),
             actions: [
               CustomElevatedButton(text: 'Yes', onPressed: () async {
@@ -38,15 +37,18 @@ class AfterFirstSignUp extends StatelessWidget {
 
 
               },),
-              GestureDetector(
-                onTap: ()=>context.pop(),
-                child: Text('No, I will stay',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: Color(0xff212121),
-                  ),),
+              SizedBox(height: 8,),
+              Center(
+                child: GestureDetector(
+                  onTap: ()=>context.pop(),
+                  child: Text('No, I will stay',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 16,
+
+                      color: Colors.black,
+                    ),),
+                ),
               ),
             ],
           ),
