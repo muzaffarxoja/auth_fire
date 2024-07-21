@@ -1,4 +1,4 @@
-import 'package:auth/main.dart';
+//import 'package:auth/main.dart';
 import 'package:auth/widgets/custom_elevated_button.dart';
 import 'package:auth/widgets/splash_screen_widget.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +10,8 @@ import 'package:provider/provider.dart';
 class HomeView extends StatelessWidget {
   final user = FirebaseAuth.instance.currentUser!;
 
+  HomeView({super.key});
+
   void _showInfoDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -17,14 +19,14 @@ class HomeView extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.all(16),
           child: AlertDialog(
-            title: Text('Log out?',
+            title: const Text('Log out?',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w500,
                 color: Color(0xff212121),
               ),),
-            content: Text('Are you shure?',
+            content: const Text('Are you shure?',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16,
@@ -37,11 +39,11 @@ class HomeView extends StatelessWidget {
 
 
               },),
-              SizedBox(height: 8,),
+              const SizedBox(height: 8,),
               Center(
                 child: GestureDetector(
                   onTap: ()=>context.pop(),
-                  child: Text('No, I will stay',
+                  child: const Text('No, I will stay',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,

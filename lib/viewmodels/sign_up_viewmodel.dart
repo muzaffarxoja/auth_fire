@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 
 import '../main.dart';
-import '../views/verify_email_view.dart';
+//import '../views/verify_email_view.dart';
 
 class RegisterViewModel with ChangeNotifier {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;

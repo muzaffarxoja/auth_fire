@@ -25,17 +25,17 @@ class SignInView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(height: 24),
+                      const SizedBox(height: 24),
                       Container(
                         width: 194,
                         height: 187,
-                        child: Image(
+                        child: const Image(
                           image: AssetImage('assets/images/login_image.png'),
                         fit: BoxFit.cover,
                       ),),
 
                       SizedBox(height: 32),
-                      Text(
+                      const Text(
                         'Welcome back',
                         style: TextStyle(
                           fontSize: 24,
@@ -43,7 +43,7 @@ class SignInView extends StatelessWidget {
                           color: Color(0xff212121),
                         ),
                       ),
-                      SizedBox(height: 28),
+                      const SizedBox(height: 28),
                       CustomTextFormField(
                         controller: viewModel.emailController,
                         labelText: 'Email',
@@ -65,7 +65,7 @@ class SignInView extends StatelessWidget {
                       ),
                       const SizedBox(height: 28),
                       GestureDetector(
-                        child: Text('Sign out'),
+                        child: Text('Sign Up'),
                         onTap: () => context.push(register_page),
                       ),
                     ],

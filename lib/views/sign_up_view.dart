@@ -7,7 +7,23 @@ import '../widgets/custom_elevated_button.dart';
 import '../widgets/custom_password_field.dart';
 import '../widgets/custom_text_form_field.dart';
 
-class SignUpView extends StatelessWidget {
+class SignUpView extends StatefulWidget {
+  @override
+  _SignUpViewState createState() => _SignUpViewState();
+}
+
+class _SignUpViewState extends State<SignUpView> {
+  @override
+  void initState() {
+    super.initState();
+    final viewModel = Provider.of<RegisterViewModel>(context, listen: false);
+    viewModel.emailController.clear();
+    viewModel.loginController.clear();
+    viewModel.passwordController.clear();
+    viewModel.passwordConfirmController.clear();
+    
+  }
+
   @override
   Widget build(BuildContext context) {
     final viewModel = Provider.of<RegisterViewModel>(context);
@@ -38,7 +54,7 @@ class SignUpView extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 24,
                     color: Color(0xff212121),
-                    fontWeight: FontWeight.w500
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
                 Form(
@@ -111,16 +127,22 @@ class SignUpView extends StatelessWidget {
 
 class PasswordCriteriaRow extends StatelessWidget {
   final String text;
-  final bool isValid;
+  final bool? isValid;
 
-  const PasswordCriteriaRow({required this.text, required this.isValid});
+  const PasswordCriteriaRow({
+    required this.text,
+    this.isValid,
+  });
 
   @override
   Widget build(BuildContext context) {
-    Color textColor = Colors.black; // Default text color
+    final viewModel = Provider.of<RegisterViewModel>(context);
+    Color textColor = Colors.black;
 
-    if (isValid) {
-      textColor = Colors.green;
+    if (viewModel.passwordController.text.isEmpty) {
+      textColor = Colors.black;
+    } else if (isValid != null) {
+      textColor = isValid! ? Colors.green : Colors.red;
     }
 
     return Row(
@@ -132,20 +154,13 @@ class PasswordCriteriaRow extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 10),
-        if (isValid)
+        if (viewModel.passwordController.text.isNotEmpty)
           Icon(
-            Icons.check,
-            color: Colors.green,
+            isValid! ? Icons.check : Icons.close,
+            color: isValid! ? Colors.green : Colors.red,
           ),
-        if (!isValid)
-          Icon(
-            Icons.close,
-            color: Colors.red,
-          ),
-
-
-
       ],
     );
   }
+
 }
