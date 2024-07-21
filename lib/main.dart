@@ -1,3 +1,8 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart';
+import 'package:firebase_core/firebase_core.dart';
+
 import 'viewmodels/verify_email_viewmodel.dart';
 import 'views/verify_email_view.dart';
 import 'viewmodels/sign_in_out_viewmodel.dart';
@@ -6,11 +11,6 @@ import 'views/sign_up_view.dart';
 import 'views/splash_screeen_view.dart';
 import 'views/sign_in_view.dart';
 import 'views/home_view.dart';
-
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:go_router/go_router.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 const String login_page = '/login_page';
 const String register_page = '/register_page';
@@ -55,7 +55,7 @@ Future main() async {
       ChangeNotifierProvider(create: (_) => RegisterViewModel()),
       ChangeNotifierProvider(create: (_) => VerifyEmailViewModel()),
     ],
-    child: MyApp(),
+    child: const MyApp(),
   ),
 
 
@@ -63,6 +63,8 @@ Future main() async {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(

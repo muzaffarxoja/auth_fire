@@ -12,7 +12,7 @@ class VerifyEmailViewModel with ChangeNotifier {
 
     if (!isEmailVerified) {
       sendVerificationEmail();
-      timer = Timer.periodic(Duration(seconds: 3), (_) => checkEmailVerified());
+      timer = Timer.periodic(const Duration(seconds: 3), (_) => checkEmailVerified());
     }
   }
 
@@ -32,7 +32,7 @@ class VerifyEmailViewModel with ChangeNotifier {
 
       canResendEmail = false;
       notifyListeners();
-      await Future.delayed(Duration(seconds: 30));
+      await Future.delayed(const Duration(seconds: 30));
       canResendEmail = true;
       notifyListeners();
 

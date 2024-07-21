@@ -19,37 +19,46 @@ class HomeView extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.all(16),
           child: AlertDialog(
-            title: const Text('Log out?',
+            title: const Text(
+              'Log out?',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w500,
                 color: Color(0xff212121),
-              ),),
-            content: const Text('Are you shure?',
+              ),
+            ),
+            content: const Text(
+              'Are you shure?',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.black,
-              ),),
+              ),
+            ),
             actions: [
-              CustomElevatedButton(text: 'Yes', onPressed: () async {
-                final viewModel = Provider.of<LoginViewModel>(context, listen: false);
-                await viewModel.signOut(context);
-
-
-              },),
-              const SizedBox(height: 8,),
+              CustomElevatedButton(
+                text: 'Yes',
+                onPressed: () async {
+                  final viewModel =
+                      Provider.of<LoginViewModel>(context, listen: false);
+                  await viewModel.signOut(context);
+                },
+              ),
+              const SizedBox(
+                height: 8,
+              ),
               Center(
                 child: GestureDetector(
-                  onTap: ()=>context.pop(),
-                  child: const Text('No, I will stay',
+                  onTap: () => context.pop(),
+                  child: const Text(
+                    'No, I will stay',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,
-
                       color: Colors.black,
-                    ),),
+                    ),
+                  ),
                 ),
               ),
             ],
@@ -59,22 +68,21 @@ class HomeView extends StatelessWidget {
     );
   }
 
-
-
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          CustomSplashScreen(text1: 'Welcome', text1Size: 20, text2: 'Lorby-your personal tutor',),
+          CustomSplashScreen(
+            text1: 'Welcome',
+            text1Size: 20,
+            text2: 'Lorby-your personal tutor',
+          ),
           const SizedBox(height: 50),
-
           GestureDetector(
-            onTap: () =>_showInfoDialog(context),
-
+            onTap: () => _showInfoDialog(context),
             child: Text('Logout'),
-
           ),
         ],
       ),
