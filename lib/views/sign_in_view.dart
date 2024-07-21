@@ -26,12 +26,14 @@ class SignInView extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       SizedBox(height: 24),
-                      Image(
+                      Container(
                         width: 194,
                         height: 187,
-                        image: AssetImage('assets/images/login_image.png'),
+                        child: Image(
+                          image: AssetImage('assets/images/login_image.png'),
                         fit: BoxFit.cover,
-                      ),
+                      ),),
+
                       SizedBox(height: 32),
                       Text(
                         'Welcome back',

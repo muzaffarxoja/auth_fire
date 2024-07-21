@@ -20,7 +20,7 @@ class RegisterViewModel with ChangeNotifier {
   bool hasDigit = false;
   bool hasSpecialCharacter = false;
   bool hasValidLength = false;
-  bool isSamePassword = false;
+  bool isIdentical = false;
 
   void onPasswordChanged(String password) {
     if (password.isEmpty) {
@@ -37,6 +37,16 @@ class RegisterViewModel with ChangeNotifier {
       hasValidLength = password.length >= 8 && password.length <= 15;
 
     }
+    notifyListeners();
+  }
+
+  void onPasswordConfirmChanged(String password) {
+    if (password.isEmpty) {
+      isIdentical =false;
+
+    } else {
+      isIdentical = password == passwordConfirmController.text;
+          }
     notifyListeners();
   }
 
@@ -60,19 +70,16 @@ class RegisterViewModel with ChangeNotifier {
     if (!hasUpperCase || !hasLowerCase || !hasDigit || !hasSpecialCharacter || !hasValidLength) {
       return 'Password does not meet all conditions';
     }
-    if (passwordController == passwordConfirmController) {
-      return 'Please confirm password';
-    }
+    //
     return null;
   }
 
   String? isPasswordSame(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please enter a password';
+      return 'Please confirm your password';
     }
-
-    if (passwordController != passwordConfirmController) {
-      return 'Your passwords are not the same';
+    if (value != passwordController.text) {
+      return 'Passwords do not match';
     }
     return null;
   }

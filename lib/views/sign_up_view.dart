@@ -89,7 +89,7 @@ class SignUpView extends StatelessWidget {
                       CustomPasswordField(
                         controller: viewModel.passwordConfirmController,
                         labelText: 'Confirm password',
-                        onChanged: null,
+                        onChanged: viewModel.onPasswordConfirmChanged,
                         validator: viewModel.isPasswordSame,
                       ),
                       const SizedBox(height: 14),

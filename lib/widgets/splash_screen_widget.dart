@@ -33,12 +33,15 @@ class CustomSplashScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 65),
-            Image(
+            Container(
               height: 350,
               width: double.maxFinite,
-              fit: BoxFit.cover,
-              image: AssetImage('assets/images/splash_image.png'),
-            ),
+              child: Image(
+                fit: BoxFit.cover,
+                image: AssetImage('assets/images/splash_image.png'),
+              ),
+            )
+
           ],
         ),
       );
