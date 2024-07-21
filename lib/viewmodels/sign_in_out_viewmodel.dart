@@ -29,6 +29,11 @@ class LoginViewModel with ChangeNotifier {
     return null;
   }
 
+  void clearTextFields() {
+    emailController.clear();
+    passwordController.clear();
+  }
+
   Future<void> signIn(BuildContext context) async {
     if (formKey.currentState!.validate()) {
       try {
