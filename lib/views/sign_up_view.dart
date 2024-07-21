@@ -132,10 +132,19 @@ class PasswordCriteriaRow extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 10),
-        Icon(
-          isValid ? Icons.check : Icons.close,
-          color: isValid ? Colors.green : Colors.red,
-        ),
+        if (isValid)
+          Icon(
+            Icons.check,
+            color: Colors.green,
+          ),
+        if (!isValid)
+          Icon(
+            Icons.close,
+            color: Colors.red,
+          ),
+
+
+
       ],
     );
   }

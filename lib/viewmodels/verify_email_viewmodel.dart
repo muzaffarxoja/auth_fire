@@ -32,7 +32,7 @@ class VerifyEmailViewModel with ChangeNotifier {
 
       canResendEmail = false;
       notifyListeners();
-      await Future.delayed(Duration(seconds: 60));
+      await Future.delayed(Duration(seconds: 30));
       canResendEmail = true;
       notifyListeners();
 
